@@ -1,0 +1,39 @@
+version: '3'
+services:
+  flask_apps:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=ABC@123456789
+      - MYSQL_HOST=mysql_db
+      - MYSQL_DB=flaskcontactsapp
+    depends_on:
+      - mysql_db
+    networks:
+      - mynetwork
+      
+  mysql_db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ABC@123456789
+      MYSQL_DATABASE: flaskcontactsapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+volumes:
+  mysql8-volume:
+
+networks:
+  mynetwork:
+    driver: bridge
+
