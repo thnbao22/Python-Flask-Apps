@@ -3,7 +3,6 @@ from db import mysql
 
 contacts = Blueprint('contacts', __name__, template_folder='app/templates')
 
-
 @contacts.route('/')
 def Index():
     cur = mysql.connection.cursor()
@@ -11,7 +10,6 @@ def Index():
     data = cur.fetchall()
     cur.close()
     return render_template('index.html', contacts=data)
-
 
 @contacts.route('/add_contact', methods=['POST'])
 def add_contact():

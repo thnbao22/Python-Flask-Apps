@@ -8,7 +8,7 @@ ENV FLASK_APP=main.py
 ENV FLASK_DEBUG=1
 
 COPY ./app /app
-RUN RUN pip install --upgrade pip
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 EXPOSE 5000
